@@ -1,0 +1,58 @@
+{
+    "name": "empaphy/bcmaph",
+    "description": "Additions to the bcmath extension for PHP",
+    "keywords": [
+        "bcmath",
+        "bc math",
+        "bc",
+        "math",
+        "Arbitrary Precision",
+        "Mathematics",
+        "additions",
+        "util"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alwin Garside",
+            "email": "alwin@garsi.de",
+            "homepage": "https://yogarine.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/empaphy/bcmaph/issues",
+        "forum": "https://github.com/empaphy/bcmaph/discussions",
+        "wiki": "https://github.com/empaphy/bcmaph/wiki",
+        "source": "https://github.com/empaphy/bcmaph",
+        "rss": "https://github.com/empaphy/bcmaph/releases.atom"
+    },
+    "require": {
+        "php": ">=8.1",
+        "ext-bcmath": "*",
+        "empaphy/polyphill-bcmath": "^1"
+    },
+    "require-dev": {
+        "empaphy/dev": "^1",
+        "empaphy/polyphill": "^1"
+    },
+    "autoload": {
+        "files": [
+            "src/bcmaph.php",
+            "lib/bcmaph.php"
+        ],
+        "psr-4": {
+            "empaphy\\bcmaph\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
