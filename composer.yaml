@@ -3,12 +3,12 @@
 #
 # It consists of vendor name and project name, separated by /.
 #
-name: empaphy/colorphul
+name: empaphy/bcmath-additions
 
 ##
 # A short description of the package.
 #
-description: 'Color library for PHP'
+description: 'Additions for PHP bcmath'
 
 ##
 # The license of the package.
