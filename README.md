@@ -1,4 +1,4 @@
-# BCMaph
+# BC Maph
 [![Test Suite](https://github.com/empaphy/bcmaph/actions/workflows/test-suite.yml/badge.svg)](https://github.com/empaphy/bcmaph/actions/workflows/test-suite.yml)
 
 _Essential additions to BCMath_
@@ -12,3 +12,8 @@ You can install the package via composer:
 ```bash
 composer require 'empaphy/bcmath-additions:^1.0@dev'
 ```
+
+## BC Maph Functions
+
+- [bcgetscale](docs/function.bcgetscale.md) — Deduce the scale of arbitrary
+precision numbers.
