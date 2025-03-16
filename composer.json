@@ -45,6 +45,9 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "tests/util.php"
+        ],
         "psr-4": {
             "empaphy\\bcmaph\\tests\\": "tests/"
         }
