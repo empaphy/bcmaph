@@ -15,5 +15,7 @@ composer require 'empaphy/bcmath-additions:^1.0@dev'
 
 ## BC Maph Functions
 
+- [bcabs](docs/function.bcabs.md) — Returns the absolute value of an arbitrary
+precision number.
 - [bcgetscale](docs/function.bcgetscale.md) — Deduce the scale of arbitrary
 precision numbers.
