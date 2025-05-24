@@ -133,6 +133,28 @@ function bcceil(string $num, ?int $scale = null): string
 }
 
 /**
+ * Round fractions down.
+ *
+ * Returns the next lowest integer value (as float) by rounding down num if
+ * necessary.
+ *
+ * @param  numeric-string  $num
+ *   The numeric value to round, as a string.
+ *
+ * @return numeric-string
+ *   __num__ rounded to the next lowest integer, as a string.
+ */
+function bcfloor(string $num): string
+{
+    $periodPos = strpos($num, '.');
+    if (false === $periodPos) {
+        return $num;
+    }
+
+    return substr($num, 0, $periodPos);
+}
+
+/**
  * Deduce the scale of arbitrary precision numbers.
  *
  * Returns the highest scale value for the provided **nums** based on the
