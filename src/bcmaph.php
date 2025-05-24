@@ -6,13 +6,18 @@ namespace empaphy\bcmaph;
 
 use ValueError;
 
+use function bcadd;
 use function bccomp;
 use function bcscale;
 use function bcsub;
 use function max;
+use function min;
 use function preg_match;
 use function strlen;
 use function strpos;
+use function substr;
+
+use const PREG_OFFSET_CAPTURE;
 
 /**
  * The maximum number of decimal digits that BCMath supports.
@@ -61,6 +66,70 @@ function bcabs(string $num, ?int $scale = null): string
     }
 
     return bccomp($num, '0', $scale) < 1 ? bcsub('0', $num, $scale) : $num;
+}
+
+/**
+ * Round an arbitrary precision number up.
+ *
+ * Returns the next highest integer value within the provided __scale__ by
+ * rounding up __num__ if necessary.
+ *
+ * @param  numeric-string  $num
+ *   The value to round.
+ *
+ * @param  int<0,2147483647>|null  $scale
+ *   The number of digits after the decimal place to consider. If omitted, it
+ *   will default to the scale of __num__.
+ *
+ * @return numeric-string
+ *   __num__ rounded up to the next highest integer. The return value of
+ *   {@see bcceil()} is still of type string as the value range may be bigger
+ *   than that of `int`.
+ */
+function bcceil(string $num, ?int $scale = null): string
+{
+    $periodPos = strpos($num, '.');
+    if (false === $periodPos) {
+        return $num;
+    }
+
+    $offset = $periodPos + 1;
+    $numScale = strlen($num) - $offset;
+
+    if ($scale < 0 || $scale > BC_MAX_SCALE) {
+        throw new ValueError(
+            __FUNCTION__ . '(): Argument #2 ($scale) must be between 0 and '
+            . BC_MAX_SCALE,
+        );
+    }
+
+    if (null === $scale) {
+        $scale = min($numScale, BC_MAX_SCALE);
+    } else {
+        // No need to use a scale larger than that of `$num`.
+        $scale = min($scale, $numScale);
+    }
+
+    /** @var numeric-string $result */
+    $result = substr($num, 0, $periodPos);
+
+    // This may seem inefficient, but it's actually both the fastest and most
+    // memory-efficient way to do this.
+    if (
+        preg_match(
+            pattern: '/[1-9]/',
+            subject: $num,
+            matches: $matches,
+            flags:   PREG_OFFSET_CAPTURE,
+            offset:  $offset,
+        ) && $matches[0][1] < $offset + $scale
+    ) {
+        return '-' === $result[0]
+            ? bcsub($result, '1', 0)
+            : bcadd($result, '1', 0);
+    }
+
+    return $result;
 }
 
 /**
